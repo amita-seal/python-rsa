@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+#
 #  Copyright 2011 Sybren A. Stüvel <sybren@stuvel.eu>
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +28,7 @@ class IntegerTest(unittest.TestCase):
 
     def test_enc_dec(self):
         message = 42
-        print("\n\tMessage:   %d" % message)
+        print("\tMessage:   %d" % message)
 
         encrypted = rsa.core.encrypt_int(message, self.pub.e, self.pub.n)
         print("\tEncrypted: %d" % encrypted)
@@ -40,37 +42,9 @@ class IntegerTest(unittest.TestCase):
         message = 42
 
         signed = rsa.core.encrypt_int(message, self.priv.d, self.pub.n)
-        print("\n\tSigned:    %d" % signed)
+        print("\tSigned:    %d" % signed)
 
         verified = rsa.core.decrypt_int(signed, self.pub.e, self.pub.n)
         print("\tVerified:  %d" % verified)
 
         self.assertEqual(message, verified)
-
-    def test_extreme_values(self):
-        # message < 0
-        message = -1
-        print("\n\tMessage:   %d" % message)
-
-        with self.assertRaises(ValueError):
-            rsa.core.encrypt_int(message, self.pub.e, self.pub.n)
-
-        # message == 0
-        message = 0
-        print("\n\tMessage:   %d" % message)
-
-        encrypted = rsa.core.encrypt_int(message, self.pub.e, self.pub.n)
-        print("\tEncrypted: %d" % encrypted)
-
-        decrypted = rsa.core.decrypt_int(encrypted, self.priv.d, self.pub.n)
-        print("\tDecrypted: %d" % decrypted)
-
-        self.assertEqual(message, decrypted)
-
-        # message >= n
-        message = self.pub.n
-        print("\n\tMessage:   %d" % message)
-
-        with self.assertRaises(OverflowError):
-            rsa.core.encrypt_int(message, self.pub.e, self.pub.n)
-

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+#
 #  Copyright 2011 Sybren A. Stüvel <sybren@stuvel.eu>
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,14 +24,15 @@ Introduced in Python-RSA 3.1.
 
 """
 
+from __future__ import print_function
+
 import multiprocessing as mp
-from multiprocessing.connection import Connection
 
 import rsa.prime
 import rsa.randnum
 
 
-def _find_prime(nbits: int, pipe: Connection) -> None:
+def _find_prime(nbits, pipe):
     while True:
         integer = rsa.randnum.read_random_odd_int(nbits)
 
@@ -39,7 +42,7 @@ def _find_prime(nbits: int, pipe: Connection) -> None:
             return
 
 
-def getprime(nbits: int, poolsize: int) -> int:
+def getprime(nbits, poolsize):
     """Returns a prime number that can be stored in 'nbits' bits.
 
     Works in multiple threads at the same time.
@@ -62,7 +65,8 @@ def getprime(nbits: int, poolsize: int) -> int:
 
     # Create processes
     try:
-        procs = [mp.Process(target=_find_prime, args=(nbits, pipe_send)) for _ in range(poolsize)]
+        procs = [mp.Process(target=_find_prime, args=(nbits, pipe_send))
+                 for _ in range(poolsize)]
         # Start processes
         for p in procs:
             p.start()
@@ -79,10 +83,10 @@ def getprime(nbits: int, poolsize: int) -> int:
     return result
 
 
-__all__ = ["getprime"]
+__all__ = ['getprime']
 
-if __name__ == "__main__":
-    print("Running doctests 1000x or until failure")
+if __name__ == '__main__':
+    print('Running doctests 1000x or until failure')
     import doctest
 
     for count in range(100):
@@ -90,7 +94,7 @@ if __name__ == "__main__":
         if failures:
             break
 
-        if count % 10 == 0 and count:
-            print("%i times" % count)
+        if count and count % 10 == 0:
+            print('%i times' % count)
 
-    print("Doctests done")
+    print('Doctests done')

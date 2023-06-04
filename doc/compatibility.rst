@@ -16,7 +16,7 @@ Encryption:
 
 Signatures:
     PKCS#1 v1.5 using the following hash methods:
-    MD5, SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA3-256, SHA3-384, SHA3-512
+    MD5, SHA-1, SHA-256, SHA-384, SHA-512
 
 Private keys:
     PKCS#1 v1.5 in PEM and DER format, ASN.1 type RSAPrivateKey
@@ -25,8 +25,7 @@ Public keys:
     PKCS#1 v1.5 in PEM and DER format, ASN.1 type RSAPublicKey
 
 :ref:`VARBLOCK <bigfiles>` encryption:
-    Deprecated in Python-RSA 3.4 and removed from Python-RSA 4.0.
-    Was Python-RSA only, not compatible with any other known application.
+    Python-RSA only, not compatible with any other known application.
 
 .. _openssl:
 
@@ -60,3 +59,4 @@ PKCS#8 format you need an external tool such as OpenSSL::
     openssl rsa -in privatekey-pkcs8.pem -out privatekey.pem
 
 You can then extract the corresponding public key as described above.
+

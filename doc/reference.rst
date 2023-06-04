@@ -15,15 +15,7 @@ Functions
 
 .. autofunction:: rsa.verify
 
-.. autofunction:: rsa.find_signature_hash
-
-.. autofunction:: rsa.newkeys
-
-.. autofunction:: rsa.sign_hash
-
-.. autofunction:: rsa.compute_hash
-
-.. autodata:: rsa.pkcs1.HASH_METHODS
+.. autofunction:: rsa.newkeys(keysize)
 
 
 Classes
@@ -36,8 +28,6 @@ Classes
     The pickle module is not secure against erroneous or maliciously
     constructed data. Never unpickle data received from an untrusted
     or unauthenticated source.
-
-.. autoclass:: rsa.key.AbstractKey
 
 .. autoclass:: rsa.PublicKey
     :members:
@@ -59,13 +49,32 @@ Exceptions
 
 .. index:: VARBLOCK (file format)
 
+Module: rsa.bigfile
+-------------------
+
+.. warning::
+
+    The :py:mod:`rsa.bigfile` module is NOT recommended for general use, has been
+    deprecated since Python-RSA 3.4, and will be removed in a future release. It's
+    vulnerable to a number of attacks. See :ref:`bigfiles` for more information.
+
+The :py:mod:`rsa.bigfile` module contains functions for encrypting and
+decrypting files that are larger than the RSA key. See
+:ref:`bigfiles` for more information.
+
+.. autofunction:: rsa.bigfile.encrypt_bigfile
+
+.. autofunction:: rsa.bigfile.decrypt_bigfile
+
+.. _VARBLOCK:
+
 The VARBLOCK file format
 ++++++++++++++++++++++++
 
 .. warning::
 
     The VARBLOCK format is NOT recommended for general use, has been deprecated since
-    Python-RSA 3.4, and was removed in version 4.0. It's vulnerable to a
+    Python-RSA 3.4, and will be removed in a future release. It's vulnerable to a
     number of attacks. See :ref:`bigfiles` for more information.
 
 The VARBLOCK file format allows us to encrypt files that are larger
@@ -100,3 +109,4 @@ the core of the entire library.
 .. autofunction:: rsa.core.encrypt_int
 
 .. autofunction:: rsa.core.decrypt_int
+

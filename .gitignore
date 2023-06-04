@@ -8,14 +8,10 @@
 /distribute*.tar.gz
 /distribute*.egg
 
-.tox/
-.coverage
-.coverage.*
-.cache/
-.mypy_cache/
-.pytest_cache/
-__pycache__/
+/.tox/
+/.coverage
+/.coverage.*
+/.cache/
 
 /build/
 /doc/_build/
-.vscode/settings.json
